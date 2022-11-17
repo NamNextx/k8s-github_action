@@ -18,11 +18,11 @@ jobs:
           persist-credentials: true
           ref: develop
           path: main
-      - name: Set up JDK 1.8
+      - name: Set up JDK 11
         if: success()
         uses: actions/setup-java@v2
         with:
-          java-version: '8'
+          java-version: '11'
           distribution: 'temurin'
           cache: maven
       - name: Build and Unit test
