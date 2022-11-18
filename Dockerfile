@@ -1,11 +1,13 @@
 FROM ghcr.io/namnextx/java-based-image:v1.0.0
 
-VOLUME /tmp
+ARG JAR_FILE=target/*.jar
 
-# Add Spring boot app.jar to Container
-ADD "target/*.jar" app.jar
+# cd /opt/app
+WORKDIR /opt/app
 
-ARG JAVA_OPTS
 
-# Fire up our Spring boot app by default
-CMD [ "sh", "c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./uramdom -jar /app.jar"]
+# cp target/spring-boot-web.jar /opt/app/app.jar
+COPY ${JAR_FILE} app.jar
+
+# java -jar /opt/app/app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
